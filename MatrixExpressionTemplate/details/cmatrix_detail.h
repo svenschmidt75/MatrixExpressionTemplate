@@ -14,5 +14,5 @@ CMatrix<T, ROWS, COLS>::operator[](int row) {
 template<typename T, int ROWS, int COLS>
 CMatrixRow<T, COLS> const
 CMatrix<T, ROWS, COLS>::operator[](int row) const {
-    return CMatrixRow<T, COLS>(buffer_, ROWS);
+    return CMatrixRow<T, COLS>(buffer_, row);
 }

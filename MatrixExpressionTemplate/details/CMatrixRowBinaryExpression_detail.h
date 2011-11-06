@@ -7,19 +7,15 @@ CMatrixRowBinaryExpression<OP1, OP2, BINARY_OPERATOR>::CMatrixRowBinaryExpressio
     : op1_(op1), op2_(op2), row_(row) {}
 
 template<typename OP1, typename OP2, typename BINARY_OPERATOR>
-typename OP1::value_type&
+typename OP1::value_type
 CMatrixRowBinaryExpression<OP1, OP2, BINARY_OPERATOR>::operator[](int col) {
-//    int offset = get_offset(COLS, row_);
-//    return buffer_[offset + col];
-    static typename OP1::value_type tmp = 1.0;
-    return tmp;
+    MATRIX_PLUS<OP1, OP2, 3> tmp;
+    return tmp(op1_, op2_, row_, col);
 }
 
 template<typename OP1, typename OP2, typename BINARY_OPERATOR>
-typename OP1::value_type const &
+typename OP1::value_type const
 CMatrixRowBinaryExpression<OP1, OP2, BINARY_OPERATOR>::operator[](int col) const {
-//    int offset = get_offset(COLS, row_);
-//    return buffer_[offset + col];
-    static typename OP1::value_type tmp = 1.0;
-    return tmp;
+    MATRIX_PLUS<OP1, OP2, 3> tmp;
+    return tmp(op1_, op2_, row_, col);
 }

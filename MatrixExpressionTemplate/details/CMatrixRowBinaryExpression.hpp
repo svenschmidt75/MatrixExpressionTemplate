@@ -20,8 +20,8 @@ public:
     CMatrixRowBinaryExpression(typename OP1::RefType const op1, typename OP2::RefType const op2, int row);
 
     // When it appears as lvalue
-    value_type& operator[](int col);
-    value_type const & operator[](int col) const;
+    value_type operator[](int col);
+    value_type const operator[](int col) const;
 
 private:
     typename OP1::RefType op1_;

@@ -7,10 +7,12 @@ int main() {
     CMatrix<double, 3, 3> b;
     CMatrix<double, 3, 3> c;
 
+
     // Matrix addition
 //    a = b + c;
     b + c;
-    (b + c)[0][1];
+    
+    const double erg = (b + c)[1][2];
 
     return 0;
 }
