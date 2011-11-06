@@ -10,6 +10,7 @@ int main() {
     // Matrix addition
 //    a = b + c;
     b + c;
+    (b + c)[0][1];
 
     return 0;
 }

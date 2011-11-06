@@ -12,13 +12,13 @@
 #define CMATRIXBINARYEXPRESSION_H
 
 template<typename OP1, typename OP2, typename BINARY_OPERATOR>
-class MatrixBinaryExpression {
+class CMatrixBinaryExpression {
 public:
-    typedef MatrixBinaryExpression<OP1, OP2, BINARY_OPERATOR> RefType;
+    typedef CMatrixBinaryExpression<OP1, OP2, BINARY_OPERATOR> RefType;
     typedef typename OP1::value_type                          value_type;
 
 public:
-    MatrixBinaryExpression(typename OP1::RefType op1, typename OP2::RefType op2);
+    CMatrixBinaryExpression(typename OP1::RefType op1, typename OP2::RefType op2);
 
     // Return a row vector that acts as proxy so we can write a[row][col]
     CMatrixRowBinaryExpression<OP1, OP2, BINARY_OPERATOR> operator[](int row);

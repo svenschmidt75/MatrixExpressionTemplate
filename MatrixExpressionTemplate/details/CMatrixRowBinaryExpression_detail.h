@@ -9,13 +9,17 @@ CMatrixRowBinaryExpression<OP1, OP2, BINARY_OPERATOR>::CMatrixRowBinaryExpressio
 template<typename OP1, typename OP2, typename BINARY_OPERATOR>
 typename OP1::value_type&
 CMatrixRowBinaryExpression<OP1, OP2, BINARY_OPERATOR>::operator[](int col) {
-    int offset = get_offset(COLS, row_);
-    return buffer_[offset + col];
+//    int offset = get_offset(COLS, row_);
+//    return buffer_[offset + col];
+    static typename OP1::value_type tmp = 1.0;
+    return tmp;
 }
 
 template<typename OP1, typename OP2, typename BINARY_OPERATOR>
 typename OP1::value_type const &
 CMatrixRowBinaryExpression<OP1, OP2, BINARY_OPERATOR>::operator[](int col) const {
-    int offset = get_offset(COLS, row_);
-    return buffer_[offset + col];
+//    int offset = get_offset(COLS, row_);
+//    return buffer_[offset + col];
+    static typename OP1::value_type tmp = 1.0;
+    return tmp;
 }
