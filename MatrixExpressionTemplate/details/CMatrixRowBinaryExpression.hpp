@@ -24,8 +24,8 @@ public:
     value_type const & operator[](int col) const;
 
 private:
-    typename OP1::RefType const op1_;
-    typename OP2::RefType const op2_;
+    typename OP1::RefType op1_;
+    typename OP2::RefType op2_;
     const int                   row_;
 };
 

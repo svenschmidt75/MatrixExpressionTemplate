@@ -14,9 +14,9 @@ class MATRIX_PLUS {
 };
 
 template<typename T, int ROWS, int COLS>
-MatrixBinaryExpression<const CMatrix<T, ROWS, COLS> &, const CMatrix<T, ROWS, COLS> &, MATRIX_PLUS<T> >
+MatrixBinaryExpression<CMatrix<T, ROWS, COLS>, CMatrix<T, ROWS, COLS>, MATRIX_PLUS<T> >
 operator+(CMatrix<T, ROWS, COLS> const & op1, CMatrix<T, ROWS, COLS> const & op2) {
     // Check that op1::type and op2::type and T are compatible via concepts
 
-    return MatrixBinaryExpression<const CMatrix<T, ROWS, COLS> &, const CMatrix<T, ROWS, COLS> &, MATRIX_PLUS<T> >(op1, op2);
+    return MatrixBinaryExpression<CMatrix<T, ROWS, COLS>, CMatrix<T, ROWS, COLS>, MATRIX_PLUS<T> >(op1, op2);
 }

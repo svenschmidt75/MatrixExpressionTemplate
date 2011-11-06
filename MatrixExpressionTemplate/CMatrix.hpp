@@ -16,7 +16,7 @@
 template<typename T, int ROWS, int COLS>
 class CMatrix {
 public:
-    typedef CMatrix<T, ROWS, COLS>& RefType;
+    typedef CMatrix<T, ROWS, COLS> RefType;
     typedef T value_type;
 
 public:

@@ -3,7 +3,7 @@
 #endif
 
 template<typename OP1, typename OP2, typename BINARY_OPERATOR>
-CMatrixRowBinaryExpression<OP1, OP2, BINARY_OPERATOR>::CMatrixRowBinaryExpression(typename OP1::RefType const op1, typename OP2::RefType const op2, int row)
+CMatrixRowBinaryExpression<OP1, OP2, BINARY_OPERATOR>::CMatrixRowBinaryExpression(typename OP1::RefType op1, typename OP2::RefType op2, int row)
     : op1_(op1), op2_(op2), row_(row) {}
 
 template<typename OP1, typename OP2, typename BINARY_OPERATOR>
