@@ -1,10 +1,6 @@
-#ifdef CMATRIX_H
-  typedef int mt;
-#else
-  typedef float mt;
+#ifndef CMATRIX_H
+    #error "CMatrix_detail cannot be used. It is an implementation detail."
 #endif
-
-static_assert(sizeof(mt) == 4, "CMatrix_detail cannot be used. It is an implementation detail.");
 
 template<typename T, int ROWS, int COLS>
 CMatrix<T, ROWS, COLS>::CMatrix() : buffer_(new T[ROWS * COLS]) {}

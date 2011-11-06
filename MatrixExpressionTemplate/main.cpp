@@ -4,12 +4,12 @@
 
 int main() {
     CMatrix<double, 3, 3> a;
+    CMatrix<double, 3, 3> b;
+    CMatrix<double, 3, 3> c;
 
-    double value = a[1][2];
-
-    a[0][3] = 3.14;
-
-    value = a[0][3];
+    // Matrix addition
+//    a = b + c;
+    b + c;
 
     return 0;
 }

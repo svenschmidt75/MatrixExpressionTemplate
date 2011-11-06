@@ -16,6 +16,10 @@
 template<typename T, int ROWS, int COLS>
 class CMatrix {
 public:
+    typedef CMatrix<T, ROWS, COLS>& RefType;
+    typedef T value_type;
+
+public:
     CMatrix();
 
     // Return a row vector that acts as proxy so we can write a[row[col]
@@ -29,3 +33,9 @@ private:
 };
 
 #include "details/cmatrix_detail.h"
+
+// Matrix binary expressions
+#include "details/CMatrixBinaryExpression.hpp"
+
+// Matrix operators
+#include "details/CMatrixBinaryExpressionOperators.h"
