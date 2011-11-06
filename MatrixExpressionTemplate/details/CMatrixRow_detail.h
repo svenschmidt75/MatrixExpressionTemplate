@@ -17,14 +17,14 @@ namespace {
 }
 
 template<typename T, int COLS>
-T&
+T
 CMatrixRow<T, COLS>::operator[](int col) {
     int offset = get_offset(COLS, row_);
     return buffer_[offset + col];
 }
 
 template<typename T, int COLS>
-T const &
+T const
 CMatrixRow<T, COLS>::operator[](int col) const {
     int offset = get_offset(COLS, row_);
     return buffer_[offset + col];

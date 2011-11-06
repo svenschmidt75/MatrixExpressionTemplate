@@ -14,7 +14,6 @@ struct MATRIX_PLUS {
         typedef typename OP1::value_type T;
 
         T tmp = 0;
-        const T t = COLS;
 
         for (int k = 0; k < COLS; ++k) {
             T tmp1 = op1[row][k];

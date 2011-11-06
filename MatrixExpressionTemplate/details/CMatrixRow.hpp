@@ -16,9 +16,14 @@ class CMatrixRow {
 public:
     CMatrixRow(const boost::shared_array<T>& buffer, int row);
 
-    // When it appears as lvalue
-    T& operator[](int col);
-    const T& operator[](int col) const;
+    // The index operators both do NOT return a reference, because
+    // 1. (a*b)[i][j] should not be allowed
+    // 2. This is only used in matrix expressions, and when doing lazy evaluation,
+    //    we need the values anyway.
+    // 3. CMatrix should define these operators as returning a reference,
+    //    because a[i][j] = 1; will not work otherwise.
+    T operator[](int col);
+    T const operator[](int col) const;
 
 private:
     boost::shared_array<T> buffer_;
