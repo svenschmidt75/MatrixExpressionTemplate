@@ -15,7 +15,7 @@ template<typename OP1, typename OP2, typename BINARY_OPERATOR>
 class CMatrixBinaryExpression {
 public:
     typedef CMatrixBinaryExpression<OP1, OP2, BINARY_OPERATOR> RefType;
-    typedef typename OP1::value_type                          value_type;
+    typedef typename OP1::type_traits::value_type              value_type;
 
 public:
     CMatrixBinaryExpression(typename OP1::RefType op1, typename OP2::RefType op2);
@@ -35,7 +35,7 @@ private:
     typename OP2::RefType const op2_;
 
     // Store binary operator
-    BINARY_OPERATOR                          op_;
+    BINARY_OPERATOR             op_;
 };
 
 #include "details/CMatrixBinaryExpression_detail.h"

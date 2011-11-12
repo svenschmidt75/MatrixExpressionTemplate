@@ -26,7 +26,7 @@ public:
 private:
     typename OP1::RefType op1_;
     typename OP2::RefType op2_;
-    const int                   row_;
+    const int             row_;
 };
 
 #include "CMatrixRowBinaryExpression_detail.h"
