@@ -10,14 +10,14 @@ CMatrixRowBinaryExpression<OP1, OP2, BINARY_OPERATOR>::CMatrixRowBinaryExpressio
 }
 
 template<typename OP1, typename OP2, typename BINARY_OPERATOR>
-typename OP1::value_type
+typename type_traits<OP1>::value_type
 CMatrixRowBinaryExpression<OP1, OP2, BINARY_OPERATOR>::operator[](int col) {
     MATRIX_PLUS<OP1, OP2, 3> tmp;
     return tmp(op1_, op2_, row_, col);
 }
 
 template<typename OP1, typename OP2, typename BINARY_OPERATOR>
-typename OP1::value_type const
+typename type_traits<OP1>::value_type const
 CMatrixRowBinaryExpression<OP1, OP2, BINARY_OPERATOR>::operator[](int col) const {
     MATRIX_PLUS<OP1, OP2, 3> tmp;
     return tmp(op1_, op2_, row_, col);

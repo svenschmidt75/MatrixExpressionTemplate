@@ -14,7 +14,7 @@
 template<typename OP1, typename OP2, typename BINARY_OPERATOR>
 class CMatrixRowBinaryExpression {
 public:
-    typedef typename OP1::value_type value_type;
+    typedef typename type_traits<OP1>::value_type value_type;
 
 public:
     CMatrixRowBinaryExpression(typename OP1::RefType const op1, typename OP2::RefType const op2, int row);

@@ -10,8 +10,8 @@
 
 template<typename OP1, typename OP2, int COLS>
 struct MATRIX_PLUS {
-    typename OP1::type_traits::value_type operator()(typename OP1::RefType const op1, typename OP2::RefType const op2, int row, int col) const {
-        typedef typename OP1::type_traits::value_type T;
+    typename type_traits<OP1>::value_type operator()(typename OP1::RefType const op1, typename OP2::RefType const op2, int row, int col) const {
+        typedef typename type_traits<OP1>::value_type T;
 
         T tmp = 0;
 

@@ -15,15 +15,8 @@
 
 template<typename T, int ROWS, int COLS>
 class CMatrix {
-private:
-    template<typename T, int ROWS, int COLS>
-    struct type_traits_ {
-        typedef T value_type;
-    };
-
 public:
     typedef CMatrix<T, ROWS, COLS> RefType;
-    typedef type_traits_<T, COLS, ROWS> type_traits;
 
 public:
     CMatrix();
