@@ -7,7 +7,8 @@
  */
 #pragma once
 
-#include "details\CMatrixRow.hpp"
+#include "details/type_traits.h"
+#include "details/CMatrixRow.hpp"
 
 #include <boost/shared_array.hpp>
 
@@ -15,9 +16,6 @@
 
 template<typename T, int ROWS, int COLS>
 class CMatrix {
-public:
-    typedef CMatrix<T, ROWS, COLS> RefType;
-
 public:
     CMatrix();
 

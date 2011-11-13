@@ -14,10 +14,7 @@
 template<typename OP1, typename OP2, typename BINARY_OPERATOR>
 class CMatrixBinaryExpression {
 public:
-    typedef CMatrixBinaryExpression<OP1, OP2, BINARY_OPERATOR> RefType;
-
-public:
-    CMatrixBinaryExpression(typename OP1::RefType op1, typename OP2::RefType op2);
+    CMatrixBinaryExpression(typename type_traits<OP1>::RefType op1, typename type_traits<OP2>::RefType op2);
 
     // Return a row vector that acts as proxy so we can write a[row][col]
     CMatrixRowBinaryExpression<OP1, OP2, BINARY_OPERATOR> operator[](int row);
@@ -30,11 +27,8 @@ private:
     // copy-by-value is expensive. MatrixBinaryExpression on the other hand should be
     // copied by value. This is because if a MatrixBinaryExpression holds a Matrix, it
     // is already kept as reference, so deep copies if MatrixBinaryExpression are cheap.
-    typename OP1::RefType const op1_;
-    typename OP2::RefType const op2_;
-
-    // Store binary operator
-    BINARY_OPERATOR             op_;
+    typename type_traits<OP1>::RefType const op1_;
+    typename type_traits<OP2>::RefType const op2_;
 };
 
 #include "details/CMatrixBinaryExpression_detail.h"
