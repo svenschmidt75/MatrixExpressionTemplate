@@ -29,7 +29,7 @@ private:
     boost::shared_array<T> buffer_;
 };
 
-#include "details/cmatrix_detail.h"
+#include "details/CMatrix_detail.h"
 
 // Matrix binary expressions
 #include "details/CMatrixBinaryExpression.hpp"

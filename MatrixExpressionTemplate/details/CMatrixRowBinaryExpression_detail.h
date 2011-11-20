@@ -9,11 +9,11 @@ CMatrixRowBinaryExpression<OP1, OP2, BINARY_OPERATOR>::CMatrixRowBinaryExpressio
 template<typename OP1, typename OP2, typename BINARY_OPERATOR>
 typename type_traits<OP1>::value_type
 CMatrixRowBinaryExpression<OP1, OP2, BINARY_OPERATOR>::operator[](int col) {
-    return MATRIX_PLUS<OP1, OP2, 3>()(op1_, op2_, row_, col);
+    return CMatrix_NS::MATRIX_PLUS<OP1, OP2, 3>()(op1_, op2_, row_, col);
 }
 
 template<typename OP1, typename OP2, typename BINARY_OPERATOR>
 typename type_traits<OP1>::value_type const
 CMatrixRowBinaryExpression<OP1, OP2, BINARY_OPERATOR>::operator[](int col) const {
-    return MATRIX_PLUS<OP1, OP2, 3>()(op1_, op2_, row_, col);
+    return CMatrix_NS::MATRIX_PLUS<OP1, OP2, 3>()(op1_, op2_, row_, col);
 }
