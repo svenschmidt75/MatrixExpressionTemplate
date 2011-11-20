@@ -9,7 +9,7 @@ static_assert(sizeof(mt) == 4, "cmatrixrow_detail cannot be used. It is an imple
 template<typename T, int COLS>
 CMatrixRow<T, COLS>::CMatrixRow(const boost::shared_array<T>& buffer, int row) : buffer_(buffer), row_(row) {}
 
-namespace {
+namespace CMatrixRow_NS {
     int get_offset(int cols, int row) {
         return cols * row;
     }
@@ -19,13 +19,13 @@ namespace {
 template<typename T, int COLS>
 T
 CMatrixRow<T, COLS>::operator[](int col) {
-    int offset = get_offset(COLS, row_);
+    int offset = CMatrixRow_NS::get_offset(COLS, row_);
     return buffer_[offset + col];
 }
 
 template<typename T, int COLS>
 T const
 CMatrixRow<T, COLS>::operator[](int col) const {
-    int offset = get_offset(COLS, row_);
+    int offset = CMatrixRow_NS::get_offset(COLS, row_);
     return buffer_[offset + col];
 }

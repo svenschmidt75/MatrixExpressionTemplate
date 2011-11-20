@@ -17,7 +17,7 @@ public:
     typedef typename type_traits<OP1>::value_type value_type;
 
 public:
-    CMatrixRowBinaryExpression(typename type_traits<OP1>::RefType const op1, typename type_traits<OP1>::RefType const op2, int row);
+    CMatrixRowBinaryExpression(typename type_traits<OP1>::RefType const op1, typename type_traits<OP2>::RefType const op2, int row);
 
     // When it appears as lvalue
     value_type operator[](int col);
@@ -25,7 +25,7 @@ public:
 
 private:
     typename type_traits<OP1>::RefType op1_;
-    typename type_traits<OP1>::RefType op2_;
+    typename type_traits<OP2>::RefType op2_;
     const int                          row_;
 };
 

@@ -20,7 +20,10 @@ public:
     CMatrixRowBinaryExpression<OP1, OP2, BINARY_OPERATOR> operator[](int row);
 
     // When a[i][j] appears on the r.h.s.
+    // Return a row vector that acts as proxy so we can write a[row][col]
     CMatrixRowBinaryExpression<OP1, OP2, BINARY_OPERATOR> const operator[](int row) const;
+
+private:
 
 private:
     // We use type_traits here because Matrix objects should be held as references as

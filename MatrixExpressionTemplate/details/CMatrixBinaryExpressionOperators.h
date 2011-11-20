@@ -29,7 +29,8 @@ struct MATRIX_PLUS {
 template<typename T, int ROWS, int COLS>
 CMatrixBinaryExpression<CMatrix<T, ROWS, COLS>, CMatrix<T, ROWS, COLS>, MATRIX_PLUS<CMatrix<T, ROWS, COLS>, CMatrix<T, ROWS, COLS>, COLS> >
 operator+(CMatrix<T, ROWS, COLS> const & op1, CMatrix<T, ROWS, COLS> const & op2) {
-    // Check that op1::type and op2::type and T are compatible via concepts
+    // Check that the value types are compatible
+//    static_assert(std::is_convertible<typename type_traits<OP1>::value_type, typename type_traits<OP2>::value_type>::value, "CMatrixBinaryExpression: Incompatible types");
 
     return CMatrixBinaryExpression<CMatrix<T, ROWS, COLS>, CMatrix<T, ROWS, COLS>, MATRIX_PLUS<CMatrix<T, ROWS, COLS>, CMatrix<T, ROWS, COLS>, COLS> >(op1, op2);
 }
