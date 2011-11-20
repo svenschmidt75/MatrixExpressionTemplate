@@ -8,17 +8,15 @@
  */
 #pragma once
 
-#include "details/CMatrixBinaryExpressionOperators.h"
-
 // Forward declaration of used types
 template<typename T, int ROWS, int COLS>
 class CMatrix;
 
-template<typename OP1, typename OP2>
-class BINARY_OPERATOR;
-
 template<typename OP1, typename OP2, typename BINARY_OPERATOR>
 class CMatrixBinaryExpression;
+
+
+
 
 
 // Base type traits
@@ -49,6 +47,7 @@ struct type_traits<CMatrixBinaryExpression<OP1, OP2, BINARY_OPERATOR>> {
     // be the same. But multiplying a (m1 by m2) matrix with (n1 by n2)
     // has the constraint that m2==n1 and the result is a (m1 by n2)
     // matrices.
-    static const int                                           rows = BINARY_OPERATOR<OP1, OP2>::rows;
-    static const int                                           cols = BINARY_OPERATOR<OP1, OP2>::cols;
+    static const int                                           rows = CMatrix_NS::bin_op_type_traits<OP1, OP2, BINARY_OPERATOR<OP1, OP2>>::rows;
+//    static const int                                           rows = CMatrix_NS::bin_op_type_traits<OP1, OP2, BINARY_OPERATOR<OP1, OP2>>::cols;
 };
+

@@ -11,9 +11,6 @@ namespace CMatrix_NS {
 
     template<typename OP1, typename OP2>
     struct MATRIX_PLUS {
-        static const int rows = type_traits<OP1>::rows;
-        static const int cols = type_traits<OP1>::cols;
-
         typename type_traits<OP1>::value_type operator()(typename type_traits<OP1>::RefType const op1, typename type_traits<OP2>::RefType const op2, int row, int col) const {
             typedef typename type_traits<OP1>::value_type T;
 
@@ -35,6 +32,15 @@ namespace CMatrix_NS {
             static_assert(type_traits<OP1>::cols == type_traits<OP2>::cols, "cols mismatch in MATRIX_PLUS");
         }
 
+    };
+
+    template<typename OP1, typename OP2, typename BINARY_OPERATOR>
+    struct bin_op_type_traits {};
+
+    template<typename OP1, typename OP2>
+    struct bin_op_type_traits<OP1, OP2, MATRIX_PLUS<OP1, OP2>> {
+        static const int rows = type_traits<OP1>::rows;
+        static const int cols = type_traits<OP1>::cols;
     };
 
 }
