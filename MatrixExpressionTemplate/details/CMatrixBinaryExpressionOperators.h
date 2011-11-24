@@ -47,21 +47,27 @@ namespace CMatrix_NS {
 /*******************
  * Matrix + Matrix *
  *******************/
- 
-template<typename T, int ROWS, int COLS>
-CMatrixBinaryExpression<T, CMatrix<T, ROWS, COLS>, CMatrix<T, ROWS, COLS>, CMatrix_NS::MATRIX_PLUS>
-operator+(CMatrix<T, ROWS, COLS> const & op1, CMatrix<T, ROWS, COLS> const & op2) {
-    typedef CMatrix<T, ROWS, COLS> LHSType;
-    typedef CMatrix<T, ROWS, COLS> RHSType;
+
+template<typename T, int ROWS_A, int COLS_A, int ROWS_B, int COLS_B>
+CMatrixBinaryExpression<T, CMatrix<T, ROWS_A, COLS_A>, CMatrix<T, ROWS_B, COLS_B>, CMatrix_NS::MATRIX_PLUS>
+operator+(CMatrix<T, ROWS_A, COLS_A> const & op1, CMatrix<T, ROWS_B, COLS_B> const & op2) {
+
+    typedef CMatrix<T, ROWS_A, COLS_A> LHSType;
+    typedef CMatrix<T, ROWS_B, COLS_B> RHSType;
+
+    // Ensure the matrices are compatible
+    static_assert(ROWS_A == ROWS_B, "Matrices incompatible: Must have same number of rows");
+    static_assert(COLS_A == COLS_B, "Matrices incompatible: Must have same number of cols");
 
     // Check that the value types are compatible
-//    static_assert(std::is_convertible<typename type_traits<MatrixType>::value_type, typename type_traits<MatrixType>::value_type>::value, "CMatrixBinaryExpression: Incompatible types");
+    static_assert(std::is_convertible<typename type_traits<LHSType>::value_type, typename type_traits<RHSType>::value_type>::value, "Incompatible value types");
 
     // When doing addition, both matrices need to have the same number of columns and rows. This
     // is enforced by the compiler as both matrices, that are to be added, have the same type,
     // including ROWS and COLS.
     return CMatrixBinaryExpression<T, LHSType, RHSType, CMatrix_NS::MATRIX_PLUS>(op1, op2);
 }
+
 
 /***********************************
  * Matrix + MatrixBinaryExpression *
@@ -70,15 +76,60 @@ operator+(CMatrix<T, ROWS, COLS> const & op1, CMatrix<T, ROWS, COLS> const & op2
 template<typename T, int ROWS, int COLS, typename OP1, typename OP2, template<typename T, typename OP1, typename OP2> class BINARY_OPERATOR>
 CMatrixBinaryExpression<T, CMatrix<T, ROWS, COLS>, CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR>, CMatrix_NS::MATRIX_PLUS>
 operator+(CMatrix<T, ROWS, COLS> const & op1, CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR> const & op2) {
-    typedef CMatrix<T, ROWS, COLS> LHSType;
+
+    typedef CMatrix<T, ROWS, COLS>                                LHSType;
     typedef CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR> RHSType;
 
-    // Check that the value types are compatible
-    static_assert(std::is_convertible<typename type_traits<LHSType>::value_type, typename type_traits<OP1>::value_type>::value, "CMatrixBinaryExpression: Incompatible types");
+    // Ensure the matrices are compatible
+    static_assert(ROWS == RHSType::rows, "Matrices incompatible: Must have same number of rows");
+    static_assert(COLS == RHSType::cols, "Matrices incompatible: Must have same number of cols");
 
-    // Here, we need to make sure that lhs and rhs have the same number of columns and rows.
-//    static_assert(type_traits<LHSType>::rows == type_traits<RHSType>::rows, "CMatrixBinaryExpression: Incompatible types");
-//    static_assert(type_traits<LHSType>::cols == type_traits<RHSType>::cols, "CMatrixBinaryExpression: Incompatible types");
+    // Check that the value types are compatible
+    static_assert(std::is_convertible<typename type_traits<LHSType>::value_type, typename type_traits<OP1>::value_type>::value, "Incompatible value types");
+
+    return CMatrixBinaryExpression<T, LHSType, RHSType, CMatrix_NS::MATRIX_PLUS>(op1, op2);
+}
+
+
+/***********************************
+ * MatrixBinaryExpression + Matrix *
+ ***********************************/
+
+template<typename T, int ROWS, int COLS, typename OP1, typename OP2, template<typename T, typename OP1, typename OP2> class BINARY_OPERATOR>
+CMatrixBinaryExpression<T, CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR>, CMatrix<T, ROWS, COLS>, CMatrix_NS::MATRIX_PLUS>
+operator+(CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR> const & op1, CMatrix<T, ROWS, COLS> const & op2) {
+
+    typedef CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR> LHSType;
+    typedef CMatrix<T, ROWS, COLS>                                RHSType;
+
+    // Ensure the matrices are compatible
+    static_assert(ROWS == RHSType::rows, "Matrices incompatible: Must have same number of rows");
+    static_assert(COLS == RHSType::cols, "Matrices incompatible: Must have same number of cols");
+
+    // Check that the value types are compatible
+    static_assert(std::is_convertible<typename type_traits<LHSType>::value_type, typename type_traits<OP1>::value_type>::value, "Incompatible value types");
+
+    return CMatrixBinaryExpression<T, LHSType, RHSType, CMatrix_NS::MATRIX_PLUS>(op1, op2);
+}
+
+
+/***************************************************
+ * MatrixBinaryExpression + MatrixBinaryExpression *
+ ***************************************************/
+
+template<typename T, typename OP1, typename OP2, typename OP3, typename OP4, template<typename T, typename OP1, typename OP2> class BINARY_OPERATOR_A, template<typename T, typename OP3, typename OP4> class BINARY_OPERATOR_B>
+CMatrixBinaryExpression<T, CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR_A>, CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR_B>, CMatrix_NS::MATRIX_PLUS>
+operator+(CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR_A> const & op1, CMatrixBinaryExpression<T, OP3, OP4, BINARY_OPERATOR_B> const & op2) {
+
+    typedef CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR_A> LHSType;
+    typedef CMatrixBinaryExpression<T, OP3, OP4, BINARY_OPERATOR_B> RHSType;
+
+    // Ensure the matrices are compatible
+    static_assert(LHSType::rows == RHSType::rows, "Matrices incompatible: Must have same number of rows");
+    static_assert(LHSType::cols == RHSType::cols, "Matrices incompatible: Must have same number of cols");
+
+    // Check that the value types are compatible
+    static_assert(std::is_convertible<typename type_traits<LHSType>::value_type, typename type_traits<OP1>::value_type>::value, "Incompatible value types");
 
     return CMatrixBinaryExpression<T, LHSType, RHSType, CMatrix_NS::MATRIX_PLUS>(op1, op2);
 }
