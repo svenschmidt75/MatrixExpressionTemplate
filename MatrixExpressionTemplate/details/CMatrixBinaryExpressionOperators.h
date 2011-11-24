@@ -33,13 +33,6 @@ namespace CMatrix_NS {
             return tmp;
         }
 
-        static void check_types() {
-            // For matrix addition, both cols and rows have to the same same for
-            // lhs and rhs.
-            static_assert(type_traits<OP1>::rows == type_traits<OP2>::rows, "rows mismatch in MATRIX_PLUS");
-            static_assert(type_traits<OP1>::cols == type_traits<OP2>::cols, "cols mismatch in MATRIX_PLUS");
-        }
-
     };
 
 }

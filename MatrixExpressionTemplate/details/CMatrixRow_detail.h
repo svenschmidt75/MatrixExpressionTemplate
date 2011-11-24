@@ -1,10 +1,7 @@
-#ifdef CMATRIXROW_H
-typedef int mt;
-#else
-typedef float mt;
+#ifndef CMATRIXROW_H
+    #error "cmatrixrow_detail must not be used. It is an implementation detail."
 #endif
 
-static_assert(sizeof(mt) == 4, "cmatrixrow_detail cannot be used. It is an implementation detail.");
 
 template<typename T, int COLS>
 CMatrixRow<T, COLS>::CMatrixRow(const boost::shared_array<T>& buffer, int row) : buffer_(buffer), row_(row) {}

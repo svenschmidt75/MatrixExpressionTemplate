@@ -1,6 +1,7 @@
 #ifndef CMATRIXBINARYEXPRESSION_H
-  #error "CMatrixBinaryExpression_detail cannot be used. It is an implementation detail.");
+    #error "CMatrixBinaryExpression_detail must not be used. It is an implementation detail."
 #endif
+
 
 template<typename T, typename OP1, typename OP2, template<typename T, typename OP1, typename OP2> class BINARY_OPERATOR>
 CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR>::CMatrixBinaryExpression(typename type_traits<OP1>::RefType const op1, typename type_traits<OP2>::RefType const op2)

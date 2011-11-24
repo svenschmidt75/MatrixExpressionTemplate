@@ -1,6 +1,7 @@
 #ifndef CMATRIX_H
-    #error "CMatrix_detail cannot be used. It is an implementation detail."
+    #error "CMatrix_detail must not be used. It is an implementation detail."
 #endif
+
 
 template<typename T, int ROWS, int COLS>
 CMatrix<T, ROWS, COLS>::CMatrix() : buffer_(new T[ROWS * COLS]) {}

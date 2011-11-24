@@ -44,9 +44,12 @@ struct cmatrix_binary_operator_traits<
         CMatrix<T, ROWS_B, COLS_B>
     >
 > {
+    typedef CMatrix<T, ROWS_A, COLS_A> LHSType;
+    typedef CMatrix<T, ROWS_B, COLS_B> RHSType;
+
     // Ensure the matrices are compatible
-    static_assert(ROWS_A == ROWS_B, "Matrices incompatible: Must have same number of rows");
-    static_assert(COLS_A == COLS_B, "Matrices incompatible: Must have same number of cols");
+    static_assert(LHSType::rows == RHSType::rows, "Matrices incompatible: Must have same number of rows");
+    static_assert(LHSType::cols == RHSType::cols, "Matrices incompatible: Must have same number of cols");
 
     // We no not use static const int here, as that would mean we have to create an instance
     // of this type in order to reserve the memory for these variables. Using an enum instead
@@ -68,11 +71,12 @@ struct cmatrix_binary_operator_traits<
         CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR>
     >
 > {
-    typedef CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR> MatrixExprType;
+    typedef CMatrix<T, ROWS, COLS>                                LHSType;
+    typedef CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR> RHSType;
 
     // Ensure the matrices are compatible
-    static_assert(ROWS == MatrixExprType::rows, "Matrices incompatible: Must have same number of rows");
-    static_assert(COLS == MatrixExprType::cols, "Matrices incompatible: Must have same number of cols");
+    static_assert(LHSType::rows == RHSType::rows, "Matrices incompatible: Must have same number of rows");
+    static_assert(LHSType::cols == RHSType::cols, "Matrices incompatible: Must have same number of cols");
 
     // We no not use static const int here, as that would mean we have to create an instance
     // of this type in order to reserve the memory for these variables. Using an enum instead
@@ -94,16 +98,12 @@ struct cmatrix_binary_operator_traits<
         CMatrix<T, ROWS, COLS>
     >
 > {
-    typedef CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR> MatrixExprType;
+    typedef CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR> LHSType;
+    typedef CMatrix<T, ROWS, COLS>                                RHSType;
+    typedef cmatrix_binary_operator_traits<CMatrix_NS::MATRIX_PLUS<T, RHSType, LHSType>> traits;
 
-    // Ensure the matrices are compatible
-    static_assert(ROWS == MatrixExprType::rows, "Matrices incompatible: Must have same number of rows");
-    static_assert(COLS == MatrixExprType::cols, "Matrices incompatible: Must have same number of cols");
-
-    // We no not use static const int here, as that would mean we have to create an instance
-    // of this type in order to reserve the memory for these variables. Using an enum instead
-    // avoids this.
-    enum {rows = ROWS, cols = COLS};
+    // Matrix addition is commutative
+    enum {rows = traits::rows, cols = traits::cols};
 };
 
 
@@ -120,15 +120,15 @@ struct cmatrix_binary_operator_traits<
         CMatrixBinaryExpression<T, OP3, OP4, BINARY_OPERATOR_B>
     >
 > {
-    typedef CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR_A> LHSMatrixExprType;
-    typedef CMatrixBinaryExpression<T, OP3, OP4, BINARY_OPERATOR_B> RHSMatrixExprType;
+    typedef CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR_A> LHSType;
+    typedef CMatrixBinaryExpression<T, OP3, OP4, BINARY_OPERATOR_B> RHSType;
 
     // Ensure the matrices are compatible
-    static_assert(LHSMatrixExprType::rows == RHSMatrixExprType::rows, "Matrices incompatible: Must have same number of rows");
-    static_assert(LHSMatrixExprType::cols == RHSMatrixExprType::cols, "Matrices incompatible: Must have same number of cols");
+    static_assert(LHSType::rows == RHSType::rows, "Matrices incompatible: Must have same number of rows");
+    static_assert(LHSType::cols == RHSType::cols, "Matrices incompatible: Must have same number of cols");
 
     // We no not use static const int here, as that would mean we have to create an instance
     // of this type in order to reserve the memory for these variables. Using an enum instead
     // avoids this.
-    enum {rows = LHSMatrixExprType::rows, cols = LHSMatrixExprType::cols};
+    enum {rows = LHSType::rows, cols = LHSType::cols};
 };
