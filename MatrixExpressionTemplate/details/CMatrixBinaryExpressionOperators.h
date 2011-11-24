@@ -16,8 +16,8 @@ namespace CMatrix_NS {
             typedef typename type_traits<OP1>::value_type T;
 
             // Addition requires the matrices to be of the same type
-            static_assert(OP1::rows == OP2::rows, "");
-            static_assert(OP1::cols == OP2::cols, "");
+            static_assert(OP1::rows == OP2::rows, "Operators have incompatible number of rows");
+            static_assert(OP1::cols == OP2::cols, "Operators have incompatible number of cols");
 
             int rows = OP1::rows;
             int cols = OP1::cols;

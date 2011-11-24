@@ -32,6 +32,7 @@ private:
     boost::shared_array<T> buffer_;
 };
 
+// Internal implementation details
 #include "details/CMatrix_detail.h"
 
 // Matrix operators

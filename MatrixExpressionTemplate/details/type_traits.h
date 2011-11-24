@@ -32,6 +32,6 @@ struct type_traits<CMatrix<T, ROWS, COLS>> {
 // Specialization for CMatrixBinaryExpression
 template<typename T, typename OP1, typename OP2, template<typename T, typename OP1, typename OP2> class BINARY_OPERATOR>
 struct type_traits<CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR>> {
-    typedef typename type_traits<OP1>::value_type              value_type;
+    typedef typename type_traits<OP1>::value_type                 value_type;
     typedef CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR> RefType;
 };
