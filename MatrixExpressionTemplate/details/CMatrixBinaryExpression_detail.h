@@ -8,7 +8,7 @@ CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR>::CMatrixBinaryExpression(t
     : op1_(op1), op2_(op2) {
 
     // Check that the value types are compatible
-//    static_assert(std::is_convertible<typename type_traits<OP1>::value_type, typename type_traits<OP2>::value_type>::value, "CMatrixBinaryExpression: Incompatible types");
+    static_assert(std::is_convertible<typename type_traits<OP1>::value_type, typename type_traits<OP2>::value_type>::value, "Incompatible value types");
 }
 
 template<typename T, typename OP1, typename OP2, template<typename T, typename OP1, typename OP2> class BINARY_OPERATOR>

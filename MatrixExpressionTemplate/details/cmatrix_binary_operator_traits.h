@@ -132,3 +132,198 @@ struct cmatrix_binary_operator_traits<
     // avoids this.
     enum {rows = LHSType::rows, cols = LHSType::cols};
 };
+
+
+
+
+
+/***************************************************************/
+/* Full specialization for matrix subtraction: Matrix - Matrix */
+/***************************************************************/
+template<typename T, int ROWS_A, int COLS_A, int ROWS_B, int COLS_B>
+struct cmatrix_binary_operator_traits<
+    CMatrix_NS::MATRIX_MINUS<
+        T,
+        CMatrix<T, ROWS_A, COLS_A>,
+        CMatrix<T, ROWS_B, COLS_B>
+    >
+> {
+    typedef cmatrix_binary_operator_traits<
+        CMatrix_NS::MATRIX_PLUS<
+        T,
+        CMatrix<T, ROWS_A, COLS_A>,
+        CMatrix<T, ROWS_A, COLS_A>
+        >
+    > trait;
+
+    enum {rows = trait::rows, cols = trait::cols};
+};
+
+
+
+/*******************************************************************/
+/* Full specialization for matrix subtraction: Matrix - MatrixExpr */
+/*******************************************************************/
+
+template<typename T, int ROWS, int COLS, typename OP1, typename OP2, template<typename T, typename OP1, typename OP2> class BINARY_OPERATOR>
+struct cmatrix_binary_operator_traits<
+    CMatrix_NS::MATRIX_MINUS<
+        T,
+        CMatrix<T, ROWS, COLS>,
+        CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR>
+    >
+> {
+    typedef cmatrix_binary_operator_traits<
+        CMatrix_NS::MATRIX_PLUS<
+        T,
+        CMatrix<T, ROWS, COLS>,
+        CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR>
+        >
+    > trait;
+
+    enum {rows = trait::rows, cols = trait::cols};
+};
+
+
+
+/*******************************************************************/
+/* Full specialization for matrix subtraction: MatrixExpr - Matrix */
+/*******************************************************************/
+
+template<typename T, int ROWS, int COLS, typename OP1, typename OP2, template<typename T, typename OP1, typename OP2> class BINARY_OPERATOR>
+struct cmatrix_binary_operator_traits<
+    CMatrix_NS::MATRIX_MINUS<
+        T,
+        CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR>,
+        CMatrix<T, ROWS, COLS>
+    >
+> {
+    typedef cmatrix_binary_operator_traits<
+        CMatrix_NS::MATRIX_PLUS<
+        T,
+        CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR>,
+        CMatrix<T, ROWS, COLS>
+        >
+    > trait;
+
+    enum {rows = trait::ROWS, cols = trait::COLS};
+};
+
+
+
+/***********************************************************************/
+/* Full specialization for matrix subtraction: MatrixExpr - MatrixExpr */
+/***********************************************************************/
+
+template<typename T, typename OP1, typename OP2, typename OP3, typename OP4, template<typename T, typename OP1, typename OP2> class BINARY_OPERATOR_A, template<typename T, typename OP3, typename OP4> class BINARY_OPERATOR_B>
+struct cmatrix_binary_operator_traits<
+    CMatrix_NS::MATRIX_MINUS<
+        T,
+        CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR_A>,
+        CMatrixBinaryExpression<T, OP3, OP4, BINARY_OPERATOR_B>
+    >
+> {
+    typedef cmatrix_binary_operator_traits<
+        CMatrix_NS::MATRIX_PLUS<
+        T,
+        CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR_A>,
+        CMatrixBinaryExpression<T, OP3, OP4, BINARY_OPERATOR_B>
+        >
+    > trait;
+
+    enum {rows = trait::ROWS, cols = trait::COLS};
+};
+
+
+
+
+
+
+/******************************************************************/
+/* Full specialization for matrix multiplication: Matrix * Matrix */
+/******************************************************************/
+template<typename T, int ROWS_A, int COLS_A, int ROWS_B, int COLS_B>
+struct cmatrix_binary_operator_traits<
+    CMatrix_NS::MATRIX_MUL<
+    T,
+    CMatrix<T, ROWS_A, COLS_A>,
+    CMatrix<T, ROWS_B, COLS_B>
+    >
+> {
+    typedef CMatrix<T, ROWS_A, COLS_A> LHSType;
+    typedef CMatrix<T, ROWS_B, COLS_B> RHSType;
+
+    // Ensure matrices are compatible
+    static_assert(LHSType::cols == RHSType::rows, "Invalid matrix multiplication");
+
+    enum {rows = LHSType::rows, cols = RHSType::cols};
+};
+
+
+
+/**********************************************************************/
+/* Full specialization for matrix multiplication: Matrix * MatrixExpr */
+/**********************************************************************/
+
+template<typename T, int ROWS, int COLS, typename OP1, typename OP2, template<typename T, typename OP1, typename OP2> class BINARY_OPERATOR>
+struct cmatrix_binary_operator_traits<
+    CMatrix_NS::MATRIX_MUL<
+    T,
+    CMatrix<T, ROWS, COLS>,
+    CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR>
+    >
+> {
+    typedef CMatrix<T, ROWS, COLS>                                LHSType;
+    typedef CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR> RHSType;
+
+    // Ensure matrices are compatible
+    static_assert(LHSType::cols == RHSType::rows, "Invalid matrix multiplication");
+
+    enum {rows = LHSType::rows, cols = RHSType::cols};
+};
+
+
+
+/**********************************************************************/
+/* Full specialization for matrix multiplication: MatrixExpr * Matrix */
+/**********************************************************************/
+
+template<typename T, int ROWS, int COLS, typename OP1, typename OP2, template<typename T, typename OP1, typename OP2> class BINARY_OPERATOR>
+struct cmatrix_binary_operator_traits<
+    CMatrix_NS::MATRIX_MUL<
+    T,
+    CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR>,
+    CMatrix<T, ROWS, COLS>
+    >
+> {
+    typedef CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR> LHSType;
+    typedef CMatrix<T, ROWS, COLS>                                RHSType;
+
+    // Ensure matrices are compatible
+    static_assert(LHSType::cols == RHSType::rows, "Invalid matrix multiplication");
+
+    enum {rows = LHSType::rows, cols = RHSType::cols};
+};
+
+
+
+/**************************************************************************/
+/* Full specialization for matrix multiplication: MatrixExpr * MatrixExpr */
+/**************************************************************************/
+
+template<typename T, typename OP1, typename OP2, typename OP3, typename OP4, template<typename T, typename OP1, typename OP2> class BINARY_OPERATOR_A, template<typename T, typename OP3, typename OP4> class BINARY_OPERATOR_B>
+struct cmatrix_binary_operator_traits<
+    CMatrix_NS::MATRIX_MUL<
+    T,
+    CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR_A>,
+    CMatrixBinaryExpression<T, OP3, OP4, BINARY_OPERATOR_B>
+    >
+> {
+    typedef CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR_A> LHSType;
+    typedef CMatrixBinaryExpression<T, OP3, OP4, BINARY_OPERATOR_B> RHSType;
+
+    // Ensure matrices are compatible
+    static_assert(LHSType::cols == RHSType::rows, "Invalid matrix multiplication");
+
+    enum {rows = LHSType::rows, cols = RHSType::cols};
+};
