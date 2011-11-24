@@ -17,6 +17,9 @@
 template<typename T, int ROWS, int COLS>
 class CMatrix {
 public:
+    enum {rows = ROWS, cols = COLS};
+
+public:
     CMatrix();
 
     // Return a row vector that acts as proxy so we can write a[row[col]
@@ -31,8 +34,8 @@ private:
 
 #include "details/CMatrix_detail.h"
 
-// Matrix binary expressions
-#include "details/CMatrixBinaryExpression.hpp"
-
 // Matrix operators
 #include "details/CMatrixBinaryExpressionOperators.h"
+
+// Matrix binary expressions
+#include "details/CMatrixBinaryExpression.hpp"

@@ -11,7 +11,7 @@
 
 #define CMATRIXROWBINARYEXPRESSION_H
 
-template<typename OP1, typename OP2, typename BINARY_OPERATOR>
+template<typename T, typename OP1, typename OP2, template<typename T, typename OP1, typename OP2> class BINARY_OPERATOR>
 class CMatrixRowBinaryExpression {
 public:
     typedef typename type_traits<OP1>::value_type value_type;

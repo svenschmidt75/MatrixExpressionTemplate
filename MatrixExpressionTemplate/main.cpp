@@ -10,7 +10,7 @@ int main() {
 
     // Matrix addition
 //    a = b + c;
-    a + (b + c);
+    (a + (b + c))[1][2];
     
     const double erg = (b + c)[1][2];
 
