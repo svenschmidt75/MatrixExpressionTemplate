@@ -104,6 +104,23 @@ namespace CMatrix_NS {
 
     };
 
+    template<typename T, typename OP>
+    struct MATRIX_MUL_SCALAR<T, CMatrixScalar<T>, OP > {
+
+        typename type_traits<OP>::value_type operator()(typename type_traits<CMatrixScalar<T>>::RefType const & op1, typename type_traits<OP>::RefType const op2, int row, int col) const {
+            typedef typename type_traits<OP>::value_type T;
+
+            int rows = OP::rows;
+            int cols = OP::cols;
+
+            T tmp = op2[rows][cols];
+            tmp *= op1.getValue();
+
+            return tmp;
+        }
+
+    };
+
 }
 
 /*******************
@@ -414,10 +431,55 @@ operator*(CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR_A> const & op1, C
 
 template<typename T, int ROWS, int COLS>
 CMatrixBinaryExpression<T, CMatrix<T, ROWS, COLS>, CMatrixScalar<T>, CMatrix_NS::MATRIX_MUL_SCALAR>
-operator*(CMatrix<T, ROWS, COLS> const & op1, T value) {
+operator*(CMatrix<T, ROWS, COLS> const & op, T value) {
 
     typedef CMatrix<T, ROWS, COLS> LHSType;
     typedef CMatrixScalar<T>       RHSType;
 
-    return CMatrixBinaryExpression<T, LHSType, RHSType, CMatrix_NS::MATRIX_MUL_SCALAR>(op1, value);
+    return CMatrixBinaryExpression<T, LHSType, RHSType, CMatrix_NS::MATRIX_MUL_SCALAR>(op, value);
+}
+
+
+/*******************
+ * Scalar * Matrix *
+ *******************/
+
+template<typename T, int ROWS, int COLS>
+CMatrixBinaryExpression<T, CMatrixScalar<T>, CMatrix<T, ROWS, COLS>, CMatrix_NS::MATRIX_MUL_SCALAR>
+operator*(T value, CMatrix<T, ROWS, COLS> const & op) {
+
+    typedef CMatrixScalar<T>       LHSType;
+    typedef CMatrix<T, ROWS, COLS> RHSType;
+
+    return CMatrixBinaryExpression<T, LHSType, RHSType, CMatrix_NS::MATRIX_MUL_SCALAR>(value, op);
+}
+
+
+/***********************************
+ * MatrixBinaryExpression * Scalar *
+ ***********************************/
+
+template<typename T, typename OP1, typename OP2, template<typename T, typename OP1, typename OP2> class BINARY_OPERATOR>
+CMatrixBinaryExpression<T, CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR>, CMatrixScalar<T>, CMatrix_NS::MATRIX_MUL_SCALAR>
+operator*(CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR> const & op, T value) {
+
+    typedef CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR> LHSType;
+    typedef CMatrixScalar<T>                                      RHSType;
+
+    return CMatrixBinaryExpression<T, LHSType, RHSType, CMatrix_NS::MATRIX_MUL_SCALAR>(op, value);
+}
+
+
+/***********************************
+ * Scalar * MatrixBinaryExpression *
+ ***********************************/
+
+template<typename T, typename OP1, typename OP2, template<typename T, typename OP1, typename OP2> class BINARY_OPERATOR>
+CMatrixBinaryExpression<T, CMatrixScalar<T>, CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR>, CMatrix_NS::MATRIX_MUL_SCALAR>
+operator*(T value, CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR> const & op) {
+
+    typedef CMatrixScalar<T>                                      LHSType;
+    typedef CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR> RHSType;
+
+    return CMatrixBinaryExpression<T, LHSType, RHSType, CMatrix_NS::MATRIX_MUL_SCALAR>(value, op);
 }

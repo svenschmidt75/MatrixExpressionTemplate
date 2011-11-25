@@ -349,3 +349,62 @@ struct cmatrix_binary_operator_traits<
 
     enum {rows = LHSType::rows, cols = LHSType::cols};
 };
+
+
+
+/*************************************************************************/
+/* Full specialization for matrix/scalar multiplication: Scalar * Matrix */
+/*************************************************************************/
+template<typename T, int ROWS, int COLS>
+struct cmatrix_binary_operator_traits<
+    CMatrix_NS::MATRIX_MUL_SCALAR<
+    T,
+    CMatrixScalar<T>,
+    CMatrix<T, ROWS, COLS>
+    >
+> {
+    typedef CMatrixScalar<T>       LHSType;
+    typedef CMatrix<T, ROWS, COLS> RHSType;
+
+    enum {rows = RHSType::rows, cols = RHSType::cols};
+};
+
+
+
+/**********************************************************************/
+/* Full specialization for matrix multiplication: MatrixExpr * Scalar */
+/**********************************************************************/
+
+template<typename T, typename OP1, typename OP2, template<typename T, typename OP1, typename OP2> class BINARY_OPERATOR>
+struct cmatrix_binary_operator_traits<
+    CMatrix_NS::MATRIX_MUL_SCALAR<
+    T,
+    CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR>,
+    CMatrixScalar<T>
+    >
+> {
+    typedef CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR> LHSType;
+    typedef CMatrixScalar<T>                     RHSType;
+
+    enum {rows = LHSType::rows, cols = LHSType::cols};
+};
+
+
+
+/**********************************************************************/
+/* Full specialization for matrix multiplication: Scalar * MatrixExpr */
+/**********************************************************************/
+
+template<typename T, typename OP1, typename OP2, template<typename T, typename OP1, typename OP2> class BINARY_OPERATOR>
+struct cmatrix_binary_operator_traits<
+    CMatrix_NS::MATRIX_MUL_SCALAR<
+    T,
+    CMatrixScalar<T>,
+    CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR>
+    >
+> {
+    typedef CMatrixScalar<T>                                      LHSType;
+    typedef CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR> RHSType;
+
+    enum {rows = RHSType::rows, cols = RHSType::cols};
+};
