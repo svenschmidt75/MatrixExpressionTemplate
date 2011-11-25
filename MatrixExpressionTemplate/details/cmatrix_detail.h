@@ -21,7 +21,12 @@ template<typename T, int ROWS, int COLS>
 template<typename OP1, typename OP2, template<typename T, typename OP1, typename OP2> class BINARY_OPERATOR>
 CMatrix<T, ROWS, COLS>&
 CMatrix<T, ROWS, COLS>::operator=(CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR> const & in) {
+
+    typedef CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR> InType;
+
     // Check compatibility
+    static_assert(ROWS == InType::rows, "Row mismatch");
+    static_assert(COLS == InType::cols, "Column mismatch");
 
     for (int i = 0; i < ROWS; i++) {
         for (int j = 0; j < COLS; j++) {

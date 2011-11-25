@@ -8,6 +8,7 @@ int main() {
         CMatrix<double, 3, 3> a;
         CMatrix<double, 3, 3> b;
         CMatrix<double, 3, 3> c;
+        CMatrix<double, 3, 5> d;
 
         // Matrix addition
         //    a = b + c;
