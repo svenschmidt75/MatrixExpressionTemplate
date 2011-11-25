@@ -15,6 +15,9 @@
 template<typename T, typename OP1, typename OP2, template<typename T, typename OP1, typename OP2> class BINARY_OPERATOR>
 class CMatrixBinaryExpression;
 
+template<typename T>
+class CMatrixScalar;
+
 
 #define CMATRIX_H
 
@@ -29,6 +32,7 @@ public:
     // Assignment operator
     CMatrix& operator=(typename type_traits<CMatrix<T, rows, COLS>>::RefType& in);
 
+    // Assignment operator for binary expressions
     template<typename OP1, typename OP2, template<typename T, typename OP1, typename OP2> class BINARY_OPERATOR>
     CMatrix& operator=(CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR> const & in);
 
@@ -47,6 +51,9 @@ private:
 
 // Matrix operators
 #include "details/CMatrixBinaryExpressionOperators.h"
+
+// Matrix multiplication with scalars
+#include "details/CMatrixScalar.hpp"
 
 // Matrix binary expressions
 #include "details/CMatrixBinaryExpression.hpp"

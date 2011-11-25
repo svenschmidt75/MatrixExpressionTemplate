@@ -327,3 +327,25 @@ struct cmatrix_binary_operator_traits<
 
     enum {rows = LHSType::rows, cols = RHSType::cols};
 };
+
+
+
+
+
+
+/*************************************************************************/
+/* Full specialization for matrix/scalar multiplication: Matrix * Scalar */
+/*************************************************************************/
+template<typename T, int ROWS, int COLS>
+struct cmatrix_binary_operator_traits<
+    CMatrix_NS::MATRIX_MUL_SCALAR<
+    T,
+    CMatrix<T, ROWS, COLS>,
+    CMatrixScalar<T>
+    >
+> {
+    typedef CMatrix<T, ROWS, COLS> LHSType;
+    typedef CMatrixScalar<T>       RHSType;
+
+    enum {rows = LHSType::rows, cols = LHSType::cols};
+};

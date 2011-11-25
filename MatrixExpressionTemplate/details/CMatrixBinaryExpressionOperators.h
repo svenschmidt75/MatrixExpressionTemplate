@@ -77,6 +77,33 @@ namespace CMatrix_NS {
 
     };
 
+    
+
+    /***************************************************/
+    /* Operator for multiplying a matrix with a scalar */
+    /***************************************************/
+
+    // We specialize this operator for left and right scalar multiplication
+    template<typename T, typename OP1, typename OP2>
+    struct MATRIX_MUL_SCALAR {};
+
+    template<typename T, typename OP>
+    struct MATRIX_MUL_SCALAR<T, OP, CMatrixScalar<T> > {
+
+        typename type_traits<OP>::value_type operator()(typename type_traits<OP>::RefType const op1, typename type_traits<CMatrixScalar<T>>::RefType const & op2, int row, int col) const {
+            typedef typename type_traits<OP>::value_type T;
+
+            int rows = OP::rows;
+            int cols = OP::cols;
+
+            T tmp = op1[rows][cols];
+            tmp *= op2.getValue();
+
+            return tmp;
+        }
+
+    };
+
 }
 
 /*******************
@@ -371,4 +398,26 @@ operator*(CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR_A> const & op1, C
     static_assert(std::is_convertible<typename type_traits<LHSType>::value_type, typename type_traits<OP1>::value_type>::value, "Incompatible value types");
 
     return CMatrixBinaryExpression<T, LHSType, RHSType, CMatrix_NS::MATRIX_MUL>(op1, op2);
+}
+
+
+
+
+
+
+
+
+
+/*******************
+ * Matrix * Scalar *
+ *******************/
+
+template<typename T, int ROWS, int COLS>
+CMatrixBinaryExpression<T, CMatrix<T, ROWS, COLS>, CMatrixScalar<T>, CMatrix_NS::MATRIX_MUL_SCALAR>
+operator*(CMatrix<T, ROWS, COLS> const & op1, T value) {
+
+    typedef CMatrix<T, ROWS, COLS> LHSType;
+    typedef CMatrixScalar<T>       RHSType;
+
+    return CMatrixBinaryExpression<T, LHSType, RHSType, CMatrix_NS::MATRIX_MUL_SCALAR>(op1, value);
 }

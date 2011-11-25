@@ -15,6 +15,10 @@ class CMatrix;
 template<typename T, typename OP1, typename OP2, template<typename T, typename OP1, typename OP2> class BINARY_OPERATOR>
 class CMatrixBinaryExpression;
 
+template<typename T>
+class CMatrixScalar;
+
+
 
 // Base type traits
 template<typename ComplexType>
@@ -24,14 +28,21 @@ struct type_traits {
 
 // Specialization for CMatrix
 template<typename T, int ROWS, int COLS>
-struct type_traits<CMatrix<T, ROWS, COLS>> {
+struct type_traits<CMatrix<T, ROWS, COLS> > {
     typedef T                      value_type;
     typedef CMatrix<T, ROWS, COLS> RefType;
 };
 
 // Specialization for CMatrixBinaryExpression
 template<typename T, typename OP1, typename OP2, template<typename T, typename OP1, typename OP2> class BINARY_OPERATOR>
-struct type_traits<CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR>> {
+struct type_traits<CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR> > {
     typedef typename type_traits<OP1>::value_type                 value_type;
     typedef CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR> RefType;
+};
+
+// Specialization for CMatrixScalar
+template<typename T>
+struct type_traits<CMatrixScalar<T> > {
+    typedef T                value_type;
+    typedef CMatrixScalar<T> RefType;
 };
