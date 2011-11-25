@@ -12,6 +12,10 @@
 
 #include <boost/shared_array.hpp>
 
+template<typename T, typename OP1, typename OP2, template<typename T, typename OP1, typename OP2> class BINARY_OPERATOR>
+class CMatrixBinaryExpression;
+
+
 #define CMATRIX_H
 
 template<typename T, int ROWS, int COLS>
@@ -21,6 +25,12 @@ public:
 
 public:
     CMatrix();
+
+    // Assignment operator
+    CMatrix& operator=(typename type_traits<CMatrix<T, rows, COLS>>::RefType& in);
+
+    template<typename OP1, typename OP2, template<typename T, typename OP1, typename OP2> class BINARY_OPERATOR>
+    CMatrix& operator=(CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR> const & in);
 
     // Return a row vector that acts as proxy so we can write a[row[col]
     CMatrixRow<T, COLS> operator[](int row);

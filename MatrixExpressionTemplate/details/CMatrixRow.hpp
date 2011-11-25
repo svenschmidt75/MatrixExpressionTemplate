@@ -22,8 +22,8 @@ public:
     //    we need the values anyway.
     // 3. CMatrix should define these operators as returning a reference,
     //    because a[i][j] = 1; will not work otherwise.
-    T operator[](int col);
-    T const operator[](int col) const;
+    T& operator[](int col);
+    T const & operator[](int col) const;
 
 private:
     boost::shared_array<T> buffer_;
