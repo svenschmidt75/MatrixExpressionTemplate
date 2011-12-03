@@ -153,7 +153,7 @@ operator+(CMatrix<T, ROWS_A, COLS_A> const & op1, CMatrix<T, ROWS_B, COLS_B> con
  ***********************************/
 
 template<typename T, int ROWS, int COLS, typename OP1, typename OP2, template<typename T, typename OP1, typename OP2> class BINARY_OPERATOR>
-CMatrixBinaryExpression<T, CMatrix<T, ROWS, COLS>, CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR>, CMatrix_NS::MATRIX_PLUS>
+CMatrixBinaryExpression<T, CMatrix<T, ROWS, COLS>, CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR>, CMatrix_NS::MATRIX_PLUS> const
 operator+(CMatrix<T, ROWS, COLS> const & op1, CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR> const & op2) {
 
     typedef CMatrix<T, ROWS, COLS>                                LHSType;
@@ -175,7 +175,7 @@ operator+(CMatrix<T, ROWS, COLS> const & op1, CMatrixBinaryExpression<T, OP1, OP
  ***********************************/
 
 template<typename T, int ROWS, int COLS, typename OP1, typename OP2, template<typename T, typename OP1, typename OP2> class BINARY_OPERATOR>
-CMatrixBinaryExpression<T, CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR>, CMatrix<T, ROWS, COLS>, CMatrix_NS::MATRIX_PLUS>
+CMatrixBinaryExpression<T, CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR>, CMatrix<T, ROWS, COLS>, CMatrix_NS::MATRIX_PLUS> const
 operator+(CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR> const & op1, CMatrix<T, ROWS, COLS> const & op2) {
 
     typedef CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR> LHSType;
@@ -217,7 +217,7 @@ operator+(CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR> const & op1, CMa
  ***************************************************/
 
 template<typename T, typename OP1, typename OP2, typename OP3, typename OP4, template<typename T, typename OP1, typename OP2> class BINARY_OPERATOR_A, template<typename T, typename OP3, typename OP4> class BINARY_OPERATOR_B>
-CMatrixBinaryExpression<T, CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR_A>, CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR_B>, CMatrix_NS::MATRIX_PLUS>
+CMatrixBinaryExpression<T, CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR_A>, CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR_B>, CMatrix_NS::MATRIX_PLUS> const
 operator+(CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR_A> const & op1, CMatrixBinaryExpression<T, OP3, OP4, BINARY_OPERATOR_B> const & op2) {
 
     typedef CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR_A> LHSType;
@@ -242,7 +242,7 @@ operator+(CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR_A> const & op1, C
  *******************/
 
 template<typename T, int ROWS_A, int COLS_A, int ROWS_B, int COLS_B>
-CMatrixBinaryExpression<T, CMatrix<T, ROWS_A, COLS_A>, CMatrix<T, ROWS_B, COLS_B>, CMatrix_NS::MATRIX_MINUS>
+CMatrixBinaryExpression<T, CMatrix<T, ROWS_A, COLS_A>, CMatrix<T, ROWS_B, COLS_B>, CMatrix_NS::MATRIX_MINUS> const
 operator-(CMatrix<T, ROWS_A, COLS_A> const & op1, CMatrix<T, ROWS_B, COLS_B> const & op2) {
 
     typedef CMatrix<T, ROWS_A, COLS_A> LHSType;
@@ -267,7 +267,7 @@ operator-(CMatrix<T, ROWS_A, COLS_A> const & op1, CMatrix<T, ROWS_B, COLS_B> con
  ***********************************/
 
 template<typename T, int ROWS, int COLS, typename OP1, typename OP2, template<typename T, typename OP1, typename OP2> class BINARY_OPERATOR>
-CMatrixBinaryExpression<T, CMatrix<T, ROWS, COLS>, CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR>, CMatrix_NS::MATRIX_MINUS>
+CMatrixBinaryExpression<T, CMatrix<T, ROWS, COLS>, CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR>, CMatrix_NS::MATRIX_MINUS> const
 operator-(CMatrix<T, ROWS, COLS> const & op1, CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR> const & op2) {
 
     typedef CMatrix<T, ROWS, COLS>                                LHSType;
@@ -289,7 +289,7 @@ operator-(CMatrix<T, ROWS, COLS> const & op1, CMatrixBinaryExpression<T, OP1, OP
  ***********************************/
 
 template<typename T, int ROWS, int COLS, typename OP1, typename OP2, template<typename T, typename OP1, typename OP2> class BINARY_OPERATOR>
-CMatrixBinaryExpression<T, CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR>, CMatrix<T, ROWS, COLS>, CMatrix_NS::MATRIX_MINUS>
+CMatrixBinaryExpression<T, CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR>, CMatrix<T, ROWS, COLS>, CMatrix_NS::MATRIX_MINUS> const
 operator-(CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR> const & op1, CMatrix<T, ROWS, COLS> const & op2) {
 
     typedef CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR> LHSType;
@@ -311,7 +311,7 @@ operator-(CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR> const & op1, CMa
  ***************************************************/
 
 template<typename T, typename OP1, typename OP2, typename OP3, typename OP4, template<typename T, typename OP1, typename OP2> class BINARY_OPERATOR_A, template<typename T, typename OP3, typename OP4> class BINARY_OPERATOR_B>
-CMatrixBinaryExpression<T, CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR_A>, CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR_B>, CMatrix_NS::MATRIX_MINUS>
+CMatrixBinaryExpression<T, CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR_A>, CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR_B>, CMatrix_NS::MATRIX_MINUS> const
 operator-(CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR_A> const & op1, CMatrixBinaryExpression<T, OP3, OP4, BINARY_OPERATOR_B> const & op2) {
 
     typedef CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR_A> LHSType;
@@ -336,7 +336,7 @@ operator-(CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR_A> const & op1, C
  *******************/
 
 template<typename T, int ROWS_A, int COLS_A, int ROWS_B, int COLS_B>
-CMatrixBinaryExpression<T, CMatrix<T, ROWS_A, COLS_A>, CMatrix<T, ROWS_B, COLS_B>, CMatrix_NS::MATRIX_MUL>
+CMatrixBinaryExpression<T, CMatrix<T, ROWS_A, COLS_A>, CMatrix<T, ROWS_B, COLS_B>, CMatrix_NS::MATRIX_MUL> const
 operator*(CMatrix<T, ROWS_A, COLS_A> const & op1, CMatrix<T, ROWS_B, COLS_B> const & op2) {
 
     typedef CMatrix<T, ROWS_A, COLS_A> LHSType;
@@ -360,7 +360,7 @@ operator*(CMatrix<T, ROWS_A, COLS_A> const & op1, CMatrix<T, ROWS_B, COLS_B> con
  ***********************************/
 
 template<typename T, int ROWS, int COLS, typename OP1, typename OP2, template<typename T, typename OP1, typename OP2> class BINARY_OPERATOR>
-CMatrixBinaryExpression<T, CMatrix<T, ROWS, COLS>, CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR>, CMatrix_NS::MATRIX_MUL>
+CMatrixBinaryExpression<T, CMatrix<T, ROWS, COLS>, CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR>, CMatrix_NS::MATRIX_MUL> const
 operator*(CMatrix<T, ROWS, COLS> const & op1, CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR> const & op2) {
 
     typedef CMatrix<T, ROWS, COLS>                                LHSType;
@@ -381,7 +381,7 @@ operator*(CMatrix<T, ROWS, COLS> const & op1, CMatrixBinaryExpression<T, OP1, OP
  ***********************************/
 
 template<typename T, int ROWS, int COLS, typename OP1, typename OP2, template<typename T, typename OP1, typename OP2> class BINARY_OPERATOR>
-CMatrixBinaryExpression<T, CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR>, CMatrix<T, ROWS, COLS>, CMatrix_NS::MATRIX_MUL>
+CMatrixBinaryExpression<T, CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR>, CMatrix<T, ROWS, COLS>, CMatrix_NS::MATRIX_MUL> const
 operator*(CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR> const & op1, CMatrix<T, ROWS, COLS> const & op2) {
 
     typedef CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR> LHSType;
@@ -402,7 +402,7 @@ operator*(CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR> const & op1, CMa
  ***************************************************/
 
 template<typename T, typename OP1, typename OP2, typename OP3, typename OP4, template<typename T, typename OP1, typename OP2> class BINARY_OPERATOR_A, template<typename T, typename OP3, typename OP4> class BINARY_OPERATOR_B>
-CMatrixBinaryExpression<T, CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR_A>, CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR_B>, CMatrix_NS::MATRIX_MUL>
+CMatrixBinaryExpression<T, CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR_A>, CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR_B>, CMatrix_NS::MATRIX_MUL> const
 operator*(CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR_A> const & op1, CMatrixBinaryExpression<T, OP3, OP4, BINARY_OPERATOR_B> const & op2) {
 
     typedef CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR_A> LHSType;
@@ -430,7 +430,7 @@ operator*(CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR_A> const & op1, C
  *******************/
 
 template<typename T, int ROWS, int COLS>
-CMatrixBinaryExpression<T, CMatrix<T, ROWS, COLS>, CMatrixScalar<T>, CMatrix_NS::MATRIX_MUL_SCALAR>
+CMatrixBinaryExpression<T, CMatrix<T, ROWS, COLS>, CMatrixScalar<T>, CMatrix_NS::MATRIX_MUL_SCALAR> const
 operator*(CMatrix<T, ROWS, COLS> const & op, T value) {
 
     typedef CMatrix<T, ROWS, COLS> LHSType;
@@ -445,7 +445,7 @@ operator*(CMatrix<T, ROWS, COLS> const & op, T value) {
  *******************/
 
 template<typename T, int ROWS, int COLS>
-CMatrixBinaryExpression<T, CMatrixScalar<T>, CMatrix<T, ROWS, COLS>, CMatrix_NS::MATRIX_MUL_SCALAR>
+CMatrixBinaryExpression<T, CMatrixScalar<T>, CMatrix<T, ROWS, COLS>, CMatrix_NS::MATRIX_MUL_SCALAR> const
 operator*(T value, CMatrix<T, ROWS, COLS> const & op) {
 
     typedef CMatrixScalar<T>       LHSType;
@@ -460,7 +460,7 @@ operator*(T value, CMatrix<T, ROWS, COLS> const & op) {
  ***********************************/
 
 template<typename T, typename OP1, typename OP2, template<typename T, typename OP1, typename OP2> class BINARY_OPERATOR>
-CMatrixBinaryExpression<T, CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR>, CMatrixScalar<T>, CMatrix_NS::MATRIX_MUL_SCALAR>
+CMatrixBinaryExpression<T, CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR>, CMatrixScalar<T>, CMatrix_NS::MATRIX_MUL_SCALAR> const
 operator*(CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR> const & op, T value) {
 
     typedef CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR> LHSType;
@@ -475,7 +475,7 @@ operator*(CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR> const & op, T va
  ***********************************/
 
 template<typename T, typename OP1, typename OP2, template<typename T, typename OP1, typename OP2> class BINARY_OPERATOR>
-CMatrixBinaryExpression<T, CMatrixScalar<T>, CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR>, CMatrix_NS::MATRIX_MUL_SCALAR>
+CMatrixBinaryExpression<T, CMatrixScalar<T>, CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR>, CMatrix_NS::MATRIX_MUL_SCALAR> const
 operator*(T value, CMatrixBinaryExpression<T, OP1, OP2, BINARY_OPERATOR> const & op) {
 
     typedef CMatrixScalar<T>                                      LHSType;
